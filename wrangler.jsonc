@@ -1,0 +1,23 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "volo-sports-notifications",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-11-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true },
+
+  // Off to match Val Town. Change to ["*/30 * * * *"] and redeploy to turn alerts on.
+  "triggers": { "crons": [] },
+
+  "kv_namespaces": [
+    // No id: wrangler creates the namespace on first deploy and fills it in.
+    { "binding": "VOLO_SPORTS_NOTIFICATIONS" }
+  ],
+
+  // Needs Email Routing on FROM_ADDRESS's domain, with TO_ADDRESS as a verified destination.
+  "send_email": [{ "name": "SEND_EMAIL" }]
+
+  // Secrets, kept out of git (set with `npx wrangler secret put <NAME>`; for local dev put them in .dev.vars):
+  //   FROM_ADDRESS   - sender, any address on your Email Routing domain
+  //   TO_ADDRESS     - your inbox
+}
