@@ -6,6 +6,10 @@
   "compatibility_flags": ["nodejs_compat"],
   "observability": { "enabled": true },
 
+  // Cron-only Worker, so no public URLs.
+  "workers_dev": false,
+  "preview_urls": false,
+
   // Off to match Val Town. Change to ["*/30 * * * *"] and redeploy to turn alerts on.
   "triggers": { "crons": [] },
 
